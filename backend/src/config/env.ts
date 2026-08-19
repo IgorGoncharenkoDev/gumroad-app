@@ -1,4 +1,5 @@
 import dotenv from 'dotenv'
+import type { StringValue } from 'ms'
 import { z } from 'zod'
 
 dotenv.config()
@@ -13,8 +14,9 @@ const envSchema = z.object({
   FRONTEND_ORIGIN: z.url(),
 
   COOKIE_NAME: z.string().min(1),
-  JWT_SECRET: z.string().min(1),
-  JWT_EXPIRES_IN: z.string().min(1),
+  JWT_ACCESS_SECRET: z.string().min(1),
+  JWT_REFRESH_SECRET: z.string().min(1),
+  JWT_EXPIRES_IN: z.string().min(1) as z.ZodType<StringValue>,
 
   CLOUDINARY_CLOUD_NAME: z.string().min(1),
   CLOUDINARY_API_KEY: z.string().min(1),

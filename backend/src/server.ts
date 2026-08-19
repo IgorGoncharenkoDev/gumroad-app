@@ -3,7 +3,7 @@ import http from 'node:http'
 import app from '@/app'
 import { connectToMongoDB } from '@/config/db'
 import { env } from '@/config/env'
-import { logger } from '@/lib/logger'
+import { chalkLogger } from '@/lib/chalkLogger'
 
 async function startServer() {
   await connectToMongoDB()
@@ -13,11 +13,11 @@ async function startServer() {
   const server = http.createServer(app)
 
   server.listen(port, () => {
-    logger.info(`Server is now running on port ${port}`)
+    chalkLogger.info(`Server is now running on port ${port}`)
   })
 }
 
 startServer().catch((err) => {
-  logger.error(`Error when starting the server... :(, error: ${err}`)
+  chalkLogger.error(`Error when starting the server... :(, error: ${err}`)
   process.exit(1)
 })

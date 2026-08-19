@@ -3,13 +3,13 @@ import type { ZodType } from 'zod'
 
 import { ValidationError } from '@/errors/validation.error'
 
-interface ValidationSchemas {
+type ValidationSchema = {
   body?: ZodType
   params?: ZodType
   query?: ZodType
 }
 
-export function validate(schemas: ValidationSchemas) {
+export function validate(schemas: ValidationSchema) {
   return (req: Request, res: Response, next: NextFunction) => {
     if (schemas.body) {
       const result = schemas.body.safeParse(req.body)

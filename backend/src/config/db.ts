@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 import { env } from '@/config/env'
-import { logger } from '@/lib/logger'
+import { chalkLogger } from '@/lib/chalkLogger'
 
 export async function connectToMongoDB() {
   try {
@@ -9,9 +9,9 @@ export async function connectToMongoDB() {
       serverSelectionTimeoutMS: 10000,
     })
     
-    logger.success('Connected to MongoDB')
+    chalkLogger.success('Connected to MongoDB')
   } catch (error) {
-    logger.error(`Failed to connect to MongoDB: ${error}`)
+    chalkLogger.error(`Failed to connect to MongoDB: ${error}`)
     
     process.exit(1)
   }

@@ -2,6 +2,7 @@ import type { NextFunction, Request, Response } from 'express'
 
 import { AppError } from '@/errors/app.error'
 import { ValidationError } from '@/errors/validation.error'
+import { logger } from '@/lib/logger'
 
 export function errorMiddleware(
   error: unknown,
@@ -9,7 +10,9 @@ export function errorMiddleware(
   res: Response,
   _next: NextFunction,
 ) {
-  console.error(error)
+  logger.error('Request failed', {
+    error,
+  })
 
   if (error instanceof ValidationError) {
     return res.status(error.statusCode).json({

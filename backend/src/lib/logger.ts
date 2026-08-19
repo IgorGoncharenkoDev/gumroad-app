@@ -1,15 +1,22 @@
-import chalk from 'chalk'
+type LogContext = Record<string, unknown>
+
+function format(level: string, message: string, context?: LogContext) {
+  return {
+    timestamp: new Date().toISOString(),
+    level,
+    message,
+    ...(context && {
+      context,
+    }),
+  }
+}
 
 export const logger = {
-  info: (message: string) => {
-    console.log(chalk.blue('[INFO]'), message)
+  info(message: string, context?: LogContext) {
+    console.log(JSON.stringify(format('INFO', message, context)))
   },
 
-  success: (message: string) => {
-    console.log(chalk.green('[SUCCESS]'), message)
-  },
-
-  error: (message: string) => {
-    console.log(chalk.red('[ERROR]'), message)
+  error(message: string, context?: LogContext) {
+    console.error(JSON.stringify(format('ERROR', message, context)))
   },
 }
