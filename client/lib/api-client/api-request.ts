@@ -5,7 +5,7 @@ const API_BASE_URL =
 
 export async function apiRequest<TResponse>(
   path: string,
-  options: RequestInit = {}
+  options: RequestInit = {},
 ): Promise<ClientResult<TResponse>> {
   const url = `${API_BASE_URL}/api${path}`
 
