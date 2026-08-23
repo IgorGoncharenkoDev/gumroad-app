@@ -5,7 +5,6 @@ import type { SafeUserDTO } from '@/api/types/dtos.types'
 
 type UserMeResponse = ApiResponse<SafeUserDTO>
 
-// TODO i |> to be developed
 export function httpGetUserMe(
   req: Request,
   res: Response<UserMeResponse>,
