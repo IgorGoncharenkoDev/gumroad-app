@@ -2,7 +2,8 @@ import type {
   LoginUserRequestBodyDTO,
   RegisterUserRequestBodyDTO,
 } from '@/api/schemas/auth/auth.schema'
-import { ValidationError } from '@/errors/validation.error'
+import { ConflictError } from '@/errors/conflict.error'
+import { UnauthorizedError } from '@/errors/unauthorized.error'
 import { comparePasswords, createHashedPassword } from '@/lib/auth/hash'
 import {
   createUser as createDbUser,
@@ -19,7 +20,7 @@ export async function registerUser({
   const dbUser = await findUserByEmail(email)
 
   if (dbUser) {
-    throw new ValidationError('Email already exists')
+    throw new ConflictError('Email already exists')
   }
 
   return createDbUser({
@@ -35,7 +36,7 @@ export async function loginUser({ email, password }: LoginUserParams) {
   const dbUser = await findUserByEmail(email)
 
   if (!dbUser) {
-    throw new ValidationError('Incorrect email or password')
+    throw new UnauthorizedError('Incorrect email or password')
   }
 
   const passwordsMatch = await comparePasswords({
@@ -44,7 +45,7 @@ export async function loginUser({ email, password }: LoginUserParams) {
   })
 
   if (!passwordsMatch) {
-    throw new ValidationError('Incorrect email or password')
+    throw new UnauthorizedError('Incorrect email or password')
   }
 
   return dbUser
