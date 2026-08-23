@@ -1,3 +1,4 @@
+import { AppError } from '@/lib/errors/AppError'
 import {
   ApiClientResponse,
   ApiClientResult,
@@ -12,30 +13,42 @@ export const mapTransportError = (error: TransportError): ApiError => {
     case 'unauthorized':
       return {
         status: 'error',
+        type: 'unauthorized',
         message: 'Unauthorized',
       }
 
     case 'forbidden':
       return {
         status: 'error',
+        type: 'forbidden',
         message: 'Forbidden',
       }
 
     case 'network_error':
       return {
         status: 'error',
+        type: 'external_error',
         message: error.message ?? 'Network error',
       }
 
     case 'aborted':
       return {
         status: 'error',
+        type: 'external_error',
         message: 'Request cancelled',
+      }
+
+    case 'unknown_error':
+      return {
+        status: 'error',
+        type: 'external_error',
+        message: error.message ?? 'Unknown error',
       }
 
     default:
       return {
         status: 'error',
+        type: 'external_error',
         message: 'Unknown error',
       }
   }
@@ -64,6 +77,7 @@ export const unwrapApiResult = <T>(
       ok: false,
       error: {
         status: 'error',
+        type: result.data.type,
         message: result.data.message,
       },
     }
@@ -87,7 +101,7 @@ export async function unwrapApiResultOrThrow<T>(
   const result = unwrapApiResult(await promise)
 
   if (!result.ok) {
-    throw new Error(result.error.message)
+    throw new AppError(result.error.type, result.error.message)
   }
 
   return result.data

@@ -1,11 +1,7 @@
 import { AppError } from './app.error'
 
-export class ForbiddenError
-  extends AppError
-{
-  constructor(
-    message = 'Forbidden',
-  ) {
-    super(403, message)
+export class ForbiddenError extends AppError {
+  constructor(message = 'Forbidden') {
+    super(403, 'forbidden', message)
   }
 }

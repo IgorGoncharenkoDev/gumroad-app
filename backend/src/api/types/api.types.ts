@@ -1,5 +1,7 @@
 import type { Request } from 'express'
 
+import type { AppErrorType } from '@/errors/app.error'
+
 export type ApiSuccess<T> = {
   status: 'success'
   message?: string
@@ -8,7 +10,9 @@ export type ApiSuccess<T> = {
 
 export type ApiError = {
   status: 'error'
+  type: AppErrorType
   message: string
+  errors?: unknown
 }
 
 // API contract

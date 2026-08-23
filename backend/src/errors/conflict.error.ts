@@ -6,6 +6,6 @@ export class ConflictError
   constructor(
     message = 'Resource conflict',
   ) {
-    super(409, message)
+    super(409, 'conflict', message)
   }
 }

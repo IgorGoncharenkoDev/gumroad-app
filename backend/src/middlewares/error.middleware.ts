@@ -16,6 +16,8 @@ export function errorMiddleware(
 
   if (error instanceof ValidationError) {
     return res.status(error.statusCode).json({
+      status: 'error',
+      type: error.type,
       message: error.message,
       errors: error.errors,
     })
@@ -23,11 +25,15 @@ export function errorMiddleware(
 
   if (error instanceof AppError) {
     return res.status(error.statusCode).json({
+      status: 'error',
+      type: error.type,
       message: error.message,
     })
   }
 
   return res.status(500).json({
+    status: 'error',
+    type: 'external_error',
     message: 'Internal server error',
   })
 }

@@ -1,3 +1,5 @@
+import { AppErrorType } from '@/lib/errors/AppError'
+
 export type TransportError =
   | { type: 'unauthorized' }
   | { type: 'aborted' }
@@ -15,6 +17,7 @@ export type ApiSuccess<T> = {
 
 export type ApiError = {
   status: 'error'
+  type: AppErrorType
   message: string
 }
 

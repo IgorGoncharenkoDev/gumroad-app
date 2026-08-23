@@ -6,6 +6,6 @@ export class NotFoundError
   constructor(
     message = 'Resource not found',
   ) {
-    super(404, message)
+    super(404, 'not_found', message)
   }
 }
