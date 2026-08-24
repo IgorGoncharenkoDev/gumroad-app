@@ -1,10 +1,14 @@
 import type { ReactNode } from 'react'
 
+import { getVisitor } from '@/lib/auth/get-visitor'
+
 type AuthLayoutProps = {
-  children?: ReactNode
+  children: ReactNode
 }
 
-export default function AuthLayout({ children }: AuthLayoutProps) {
+export default async function AuthLayout({ children }: AuthLayoutProps) {
+  await getVisitor()
+  
   return (
     <div className="flex min-h-dvh">
       <div className="flex-1">

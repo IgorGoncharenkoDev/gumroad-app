@@ -25,6 +25,7 @@ export function SignInForm() {
       { email, password },
       {
         onSuccess: () => {
+          sessionStorage.setItem('login-success', 'true')
           router.push('/')
         },
       },
@@ -40,6 +41,7 @@ export function SignInForm() {
             required
             autoComplete="email"
             className="h-11 border-zinc-300 text-[15px] placeholder:text-zinc-400"
+            placeholder="Your email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -53,6 +55,7 @@ export function SignInForm() {
             required
             autoComplete="password"
             className="h-11 border-zinc-300 text-[15px] placeholder:text-zinc-400"
+            placeholder="Your password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
