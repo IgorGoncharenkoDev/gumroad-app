@@ -14,7 +14,7 @@ export default async function AuthLayout({ children }: AuthLayoutProps) {
       <div className="flex-1">
         <div className="mx-auto flex h-full max-w-2xl flex-col">{children}</div>
       </div>
-      <div className="relative hidden w-[40vw] border-l border-zinc-200 lg:block">
+      <div className="relative hidden w-[40vw] border-l border-zinc-200 md:block">
         <img
           alt=""
           className="absolute inset-0 h-full w-full object-cover"

@@ -16,4 +16,8 @@ export type PostRegisterUserParams = {
 }
 export type PostRegisterUserReturn = Promise<ClientResult<ApiResponse<SafeUserDTO>>>
 
+export type PostLogoutUserReturn = Promise<
+  ClientResult<ApiResponse<null>>
+>
+
 export type GetCurrentUserReturn = Promise<ClientResult<ApiResponse<SafeUserDTO>>>

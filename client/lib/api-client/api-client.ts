@@ -1,7 +1,7 @@
 import { apiRequest } from '@/lib/api-client/api-request'
 import {
   PostLoginUserParams,
-  PostLoginUserReturn,
+  PostLoginUserReturn, PostLogoutUserReturn,
   PostRegisterUserParams,
   PostRegisterUserReturn,
 } from '@/lib/api-client/types'
@@ -17,6 +17,10 @@ export const apiClient = {
           method: 'POST',
         }),
     },
+    logoutUser: {
+      post: (): PostLogoutUserReturn =>
+        apiRequest<ApiResponse<null>>('/auth/logout', { method: 'POST' }),
+    },
     registerUser: {
       post: (data: PostRegisterUserParams): PostRegisterUserReturn =>
         apiRequest<ApiResponse<SafeUserDTO>>('/auth/register', {
@@ -25,9 +29,7 @@ export const apiClient = {
         }),
     },
   },
-  user: {
-
-  },
+  user: {},
 }
 
 export type ApiClient = typeof apiClient
