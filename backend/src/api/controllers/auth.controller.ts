@@ -7,7 +7,7 @@ import type {
 import type { ApiResponse, RequestWithBody } from '@/api/types/api.types'
 import type { SafeUserDTO } from '@/api/types/dtos.types'
 import { createAuthSession } from '@/lib/auth/auth-session'
-import { clearAuthCookie } from '@/lib/auth/cookies';
+import { clearAuthCookie } from '@/lib/auth/cookies'
 import { toSafeUserDTO } from '@/lib/mappers/user.mapper'
 import { loginUser, registerUser } from '@/services/auth.service'
 
@@ -36,12 +36,7 @@ export async function httpPostAuthLoginUser(
   req: RequestWithBody<LoginUserRequestBodyDTO>,
   res: Response<LoginUserResponse>,
 ): Promise<Response<LoginUserResponse>> {
-  const { email, password } = req.body
-
-  const dbUser = await loginUser({
-    email,
-    password,
-  })
+  const dbUser = await loginUser(req.body)
 
   createAuthSession({
     res,
