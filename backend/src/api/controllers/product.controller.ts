@@ -2,11 +2,11 @@ import type { Request, Response } from 'express'
 
 import type { CreateProductRequestBodyDTO } from '@/api/schemas/product/product.schema'
 import type { ApiResponse, RequestWithBody } from '@/api/types/api.types'
-import type { ProductDTO } from '@/api/types/dtos.types'
+import type { SafeProductDTO } from '@/api/types/dtos.types'
 import { ProductModel } from '@/db/models/product.model'
 import { createProduct } from '@/services/product.service'
 
-type CreateProductResponse = ApiResponse<ProductDTO>
+type CreateProductResponse = ApiResponse<SafeProductDTO>
 
 export async function httpPostProduct(
   req: RequestWithBody<CreateProductRequestBodyDTO>,

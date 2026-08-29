@@ -1,4 +1,4 @@
-import { ClientResult } from '@/types/api.types';
+import { ApiError, ClientResult } from '@/types/api.types';
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000'
@@ -35,17 +35,25 @@ export async function apiRequest<TResponse>(
         data: undefined as TResponse,
       }
     }
-    if (response.status === 401) return { type: 'unauthorized' }
-    if (response.status === 403) return { type: 'forbidden' }
 
     if (!response.ok) {
-      const error: { message?: string } = await response
-        .json()
-        .catch(() => ({}))
+      const error: ApiError = await response.json().catch(() => ({}))
+
+      if (response.status === 401) {
+        return {
+          type: 'unauthorized',
+          message: error.message,
+        }
+      }
+
+      if (response.status === 403) {
+        return { type: 'forbidden' }
+      }
 
       return {
         type: 'unknown_error',
         message: error.message ?? 'Request failed',
+        errors: error.errors,
       }
     }
 

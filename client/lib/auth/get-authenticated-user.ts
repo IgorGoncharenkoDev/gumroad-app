@@ -1,14 +1,14 @@
 import { redirect } from 'next/navigation'
 
 import { requireClientAuth } from '@/lib/auth/require-client-auth'
-import { AppError } from '@/lib/errors/AppError'
-import { SafeUserDTO } from '@/types/dtos.types'
+import { ApiError } from '@/lib/errors/ApiError'
+import { UserDTO } from '@/types/dtos.types'
 
-export async function getAuthenticatedUser (): Promise<SafeUserDTO> {
+export async function getAuthenticatedUser(): Promise<UserDTO> {
   try {
     return await requireClientAuth()
   } catch (error) {
-    if (error instanceof AppError && error.type === 'unauthorized') {
+    if (error instanceof ApiError && error.type === 'unauthorized') {
       redirect('/sign-in')
     }
 

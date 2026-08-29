@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation'
 import type { SubmitEvent } from 'react'
 import { useState } from 'react'
+import { toast } from 'sonner'
 
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -28,6 +29,9 @@ export function SignInForm() {
           sessionStorage.setItem('login-success', 'true')
           router.push('/')
         },
+        onError: (error) => {
+          toast.error(error.message)
+        }
       },
     )
   }

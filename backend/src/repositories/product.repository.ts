@@ -1,15 +1,14 @@
 import type { ClientSession } from 'mongoose'
 
-import type { ProductDTO } from '@/api/types/dtos.types'
-import { ProductModel } from '@/db/models/product.model'
+import { ProductModel, type ProductSchemaType } from '@/db/models/product.model'
 
-// defining the contract explicitly to avoid using Partial<ProductDTO>
+// defining the contract explicitly to avoid using Partial<ProductSchemaType>
 type CreateProductParams = {
-  creatorId: ProductDTO['creatorId']
-  title: ProductDTO['title']
-  description: ProductDTO['description']
-  price: ProductDTO['price']
-  slug: ProductDTO['slug']
+  creatorId: ProductSchemaType['creatorId']
+  title: ProductSchemaType['title']
+  description: ProductSchemaType['description']
+  price: ProductSchemaType['price']
+  slug: ProductSchemaType['slug']
 }
 
 export async function createProduct(

@@ -4,6 +4,7 @@ import slugify from 'slugify'
 import type { CreateProductRequestBodyDTO } from '@/api/schemas/product/product.schema'
 import type { SafeUserDTO } from '@/api/types/dtos.types'
 import { ProductModel } from '@/db/models/product.model'
+import { toSafeProductDTO } from '@/lib/mappers/product.mapper'
 import {
   createUniqueSlug,
 } from '@/lib/product/find-unique-slug'
@@ -18,6 +19,8 @@ type CreateProductParams = {
 export async function createProduct({ productData, user }: CreateProductParams) {
   const { description, price, title } = productData
   const { id: userId } = user
+
+  const priceInCents = Math.round(price * 100)
 
   const baseSlug = slugify(title, {
     lower: true,
@@ -42,7 +45,7 @@ export async function createProduct({ productData, user }: CreateProductParams) 
     creatorId,
     title,
     description,
-    price,
+    price: priceInCents,
     slug: uniqueSlug,
   }
 
@@ -63,7 +66,7 @@ export async function createProduct({ productData, user }: CreateProductParams) 
         session,
       })
 
-      return product
+      return toSafeProductDTO(product)
     })
   } finally {
     await session.endSession()

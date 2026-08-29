@@ -7,4 +7,16 @@ export type SafeUserDTO = {
   name: string
 }
 
-export type ProductDTO = ProductSchemaType
+export type SafeProductDTO = {
+  id: string
+  creatorId: string
+  title: string
+  description: string
+  price: number
+  slug: string
+  coverImageAssetId: string | null
+  stats: {
+    assetCount: number
+    soldCount: number
+  }
+}

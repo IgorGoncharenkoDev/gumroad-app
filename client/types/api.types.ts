@@ -1,11 +1,16 @@
 import { AppErrorType } from '@/lib/errors/AppError'
 
+export type ValidationError = {
+  field: string
+  message: string
+}
+
 export type TransportError =
-  | { type: 'unauthorized' }
+  | { type: 'unauthorized', message?: string }
   | { type: 'aborted' }
   | { type: 'forbidden' }
   | { type: 'network_error'; message?: string }
-  | { type: 'unknown_error'; message?: string }
+  | { type: 'unknown_error'; message?: string; errors?: ValidationError[] }
 
 export type ClientResult<T> = TransportError | { type: 'success'; data: T }
 
@@ -19,6 +24,7 @@ export type ApiError = {
   status: 'error'
   type: AppErrorType
   message: string
+  errors?: ValidationError[]
 }
 
 // API contract

@@ -1,20 +1,20 @@
-import { AppError } from '@/lib/errors/AppError'
+import { ApiError } from '@/lib/errors/ApiError'
 import {
   ApiClientResponse,
   ApiClientResult,
-  ApiError,
+  ApiError as ApiErrorType,
   ApiResponse,
   ClientResult,
   TransportError,
 } from '@/types/api.types'
 
-export const mapTransportError = (error: TransportError): ApiError => {
+export const mapTransportError = (error: TransportError): ApiErrorType => {
   switch (error.type) {
     case 'unauthorized':
       return {
         status: 'error',
         type: 'unauthorized',
-        message: 'Unauthorized',
+        message: error.message ?? 'Unauthorized',
       }
 
     case 'forbidden':
@@ -43,6 +43,7 @@ export const mapTransportError = (error: TransportError): ApiError => {
         status: 'error',
         type: 'external_error',
         message: error.message ?? 'Unknown error',
+        errors: error.errors,
       }
 
     default:
@@ -79,6 +80,7 @@ export const unwrapApiResult = <T>(
         status: 'error',
         type: result.data.type,
         message: result.data.message,
+        errors: result.data.errors,
       },
     }
   }
@@ -101,7 +103,11 @@ export async function unwrapApiResultOrThrow<T>(
   const result = unwrapApiResult(await promise)
 
   if (!result.ok) {
-    throw new AppError(result.error.type, result.error.message)
+    throw new ApiError({
+      type: result.error.type,
+      message: result.error.message,
+      errors: result.error?.errors,
+    })
   }
 
   return result.data
