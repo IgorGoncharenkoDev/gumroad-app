@@ -2,6 +2,10 @@
 
 export default function HomeErrorPage() {
   return (
-    <div>Home Error Page</div>
+    <main>
+      <h1>Something went wrong</h1>
+
+      <p>Please try again later.</p>
+    </main>
   )
 }

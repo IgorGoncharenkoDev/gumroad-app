@@ -58,7 +58,7 @@ export function SignUpForm() {
   }
 
   return (
-    <Card className="border-0 bg-transparent shadow-none">
+    <Card className="bg-transparent ring-0">
       <form className="space-y-4" onSubmit={handleFormSubmit}>
         <fieldset className="space-y-2">
           <legend className="text-sm font-medium text-zinc-900">Name</legend>
