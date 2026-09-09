@@ -26,3 +26,4 @@ export type PostProductParams = {
 }
 
 export type PostProductReturn = Promise<ClientResult<ApiResponse<ProductDTO>>>
+export type GetProductsReturn = Promise<ClientResult<ApiResponse<ProductDTO[]>>>

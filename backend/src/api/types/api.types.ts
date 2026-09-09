@@ -32,3 +32,23 @@ export type RequestWithQuery<TQuery> = Request<
   Record<string, never>,
   TQuery
 >
+
+export type RequestWithParamsAndBody<TParams, TBody> = Request<
+  TParams,
+  unknown,
+  TBody
+>
+
+export type RequestWithParamsAndQuery<TParams, TQuery> = Request<
+  TParams,
+  unknown,
+  Record<string, never>,
+  TQuery
+>
+
+export type RequestWithParamsQueryAndBody<TParams, TQuery, TBody> = Request<
+  TParams,
+  unknown,
+  TBody,
+  TQuery
+>

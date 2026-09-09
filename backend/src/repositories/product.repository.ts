@@ -18,3 +18,7 @@ export async function createProduct(
   const [createdProduct] = await ProductModel.create([product], { session })
   return createdProduct
 }
+
+export function findProductById (productId: string) {
+  return ProductModel.findById(productId)
+}

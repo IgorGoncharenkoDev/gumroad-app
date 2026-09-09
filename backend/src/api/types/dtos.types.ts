@@ -1,5 +1,3 @@
-import type { ProductSchemaType } from '@/db/models/product.model'
-
 export type SafeUserDTO = {
   email: string
   id: string
@@ -8,15 +6,33 @@ export type SafeUserDTO = {
 }
 
 export type SafeProductDTO = {
-  id: string
-  creatorId: string
-  title: string
   description: string
+  coverImageAssetId: string | null
+  creatorId: string
+  id: string
   price: number
   slug: string
-  coverImageAssetId: string | null
   stats: {
     assetCount: number
     soldCount: number
+  }
+  title: string
+  visibility: 'draft' | 'published'
+}
+
+export type SafeImageAssetDTO = {
+  id: string
+  creatorId: string
+  productId: string
+  meta: {
+    filename: string
+    contentType: string
+    sizeBytes: number
+    width: number
+    height: number
+  }
+  source: {
+    sourcePageUrl?: string
+    sourceUrl: string
   }
 }

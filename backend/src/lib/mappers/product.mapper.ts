@@ -11,5 +11,6 @@ export function toSafeProductDTO(dbProduct: DbProductDocument): SafeProductDTO {
     slug: dbProduct.slug,
     coverImageAssetId: dbProduct.coverImageAssetId?.toString() || null,
     stats: dbProduct.stats,
+    visibility: dbProduct.visibility,
   }
 }
