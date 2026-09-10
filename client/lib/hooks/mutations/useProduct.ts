@@ -8,6 +8,6 @@ export function useCreateProduct() {
     mutationFn: (productData: {
       price: string,
       title: string,
-    }) => unwrapApiResultOrThrow(apiClient.products.post({ ...productData })),
+    }) => unwrapApiResultOrThrow(apiClient.creator.products.post({ ...productData })),
   })
 }

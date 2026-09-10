@@ -31,12 +31,14 @@ export const apiClient = {
         }),
     },
   },
-  products: {
-    post: (data: PostProductParams): PostProductReturn =>
-      apiRequest<ApiResponse<ProductDTO>>('/products', {
-        body: JSON.stringify({ ...data }),
-        method: 'POST',
-      }),
+  creator: {
+    products: {
+      post: (data: PostProductParams): PostProductReturn =>
+        apiRequest<ApiResponse<ProductDTO>>('/creator/products', {
+          body: JSON.stringify({ ...data }),
+          method: 'POST',
+        }),
+    },
   },
   user: {},
 }

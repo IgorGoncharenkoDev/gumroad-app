@@ -5,7 +5,7 @@ import { apiServerClient } from '@/lib/api-client/api-server-client'
 import { unwrapApiResultOrThrow } from '@/lib/api-client/helpers'
 
 export default async function ProductsPage() {
-  const products = await unwrapApiResultOrThrow(apiServerClient.products.get())
+  const products = await unwrapApiResultOrThrow(apiServerClient.creator.products.get())
 
   return (
     <main className="flex-1 overflow-y-auto">

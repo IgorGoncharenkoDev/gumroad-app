@@ -4,15 +4,17 @@ import { ApiResponse } from '@/types/api.types'
 import { ProductDTO, UserDTO } from '@/types/dtos.types'
 
 export const apiServerClient = {
+  creator: {
+    products: {
+      get: (): GetProductsReturn =>
+        apiServerRequest<ApiResponse<ProductDTO[]>>('/creator/products'),
+    },
+  },
   user: {
     currentUser: {
       get: (): GetCurrentUserReturn =>
         apiServerRequest<ApiResponse<UserDTO>>('/me'),
     },
-  },
-  products: {
-    get: (): GetProductsReturn =>
-      apiServerRequest<ApiResponse<ProductDTO[]>>('/products'),
   },
 }
 
