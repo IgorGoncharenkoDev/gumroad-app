@@ -1,17 +1,23 @@
-import { type Request, type Response, Router } from 'express'
+import { Router } from 'express'
 
 import {
-  httpGetProduct, httpGetProductAssets,
+  httpGetProduct,
+  httpGetProductAssets,
   httpGetProducts,
   httpPatchProduct,
   httpPatchProductCover,
   httpPatchProductVisibility,
+  httpPostCreatorProductScrape,
   httpPostCreatorProductSearch,
   httpPostProduct,
+  httpPostProductIngestAssets,
 } from '@/api/controllers/creator/product.controller'
 import {
   createProductSchema,
-  creatorProductSearchSchema, updateProductCoverSchema,
+  creatorProductSearchSchema,
+  ingestAssetsSchema,
+  scrapeProductSchema,
+  updateProductCoverSchema,
   updateProductSchema,
 } from '@/api/schemas/creator/product.schema'
 import { requireAuth } from '@/middlewares/require-auth.middleware'
@@ -31,22 +37,14 @@ productRouter.post(
 
 productRouter.post(
   '/:productId/firecrawl/scrape',
-  async (_req: Request, res: Response) => {
-    res.status(200).json({
-      success: true,
-      message: '"/:productId/firecrawl/scrape" is healthy',
-    })
-  },
+  validate({ body: scrapeProductSchema }),
+  httpPostCreatorProductScrape,
 )
 
 productRouter.post(
   '/:productId/assets/ingest',
-  async (_req: Request, res: Response) => {
-    res.status(200).json({
-      success: true,
-      message: '"/:productId/assets/ingest" is healthy',
-    })
-  },
+  validate({ body: ingestAssetsSchema }),
+  httpPostProductIngestAssets,
 )
 
 /* PRODUCT ROUTES */

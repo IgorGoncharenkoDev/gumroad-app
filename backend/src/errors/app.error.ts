@@ -5,6 +5,7 @@ export type AppErrorType =
   | 'bad_request'
   | 'conflict'
   | 'external_error'
+  | 'timeout'
 
 export class AppError extends Error {
   constructor(

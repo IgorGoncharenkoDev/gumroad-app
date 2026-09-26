@@ -1,4 +1,5 @@
 import { Firecrawl } from 'firecrawl'
+import { z } from 'zod'
 
 import { env } from '@/config/env'
 
@@ -20,12 +21,38 @@ type FirecrawlSearchParams = {
  * */
 
 export async function firecrawlSearch({ limit, query }: FirecrawlSearchParams) {
-  const results = await firecrawl.search(query, {
+  return await firecrawl.search(query, {
     limit,
     scrapeOptions: {
       formats: ['markdown'],
     },
   })
+}
 
-  return results
+const scrapeJsonSchema = z.object({
+  description: z.string(),
+})
+
+export async function firecrawlScrape(url: string) {
+  const result = await firecrawl.scrape(url, {
+    formats: [
+      'images',
+      {
+        type: 'json',
+        prompt:
+          'Extract a short product description (2-3 sentences). If the page is not a product page, summarize what the page offers in 2-3 sentences.',
+        schema: z.toJSONSchema(scrapeJsonSchema),
+      },
+    ],
+    proxy: 'auto',
+    timeout: 120_000,
+    onlyMainContent: false,
+  })
+
+  const json = scrapeJsonSchema.parse(result.json)
+
+  return {
+    ...result,
+    json,
+  }
 }

@@ -7,6 +7,9 @@ export function toSafeImageAssetDTO(
   return {
     id: dbImageAsset._id.toString(),
     creatorId: dbImageAsset.creatorId.toString(),
+    cloudinary: {
+      secureUrl: dbImageAsset.cloudinary.secureUrl,
+    },
     productId: dbImageAsset.productId.toString(),
     meta: {
       contentType: dbImageAsset.meta.contentType,

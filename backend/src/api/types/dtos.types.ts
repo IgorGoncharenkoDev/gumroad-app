@@ -6,9 +6,9 @@ export type SafeUserDTO = {
 }
 
 export type SafeProductDTO = {
-  description: string
   coverImageAssetId: string | null
   creatorId: string
+  description: string
   id: string
   price: number
   slug: string
@@ -22,6 +22,9 @@ export type SafeProductDTO = {
 
 export type SafeImageAssetDTO = {
   id: string
+  cloudinary: {
+    secureUrl: string
+  }
   creatorId: string
   productId: string
   meta: {
@@ -35,4 +38,19 @@ export type SafeImageAssetDTO = {
     sourcePageUrl?: string
     sourceUrl: string
   }
+}
+
+export type SelectedAsset = {
+  url: string
+  sourcePageUrl: string
+}
+
+export type ProductScrapeDTO = {
+  candidates: SelectedAsset[]
+  description: string
+}
+
+export type ProductIngestAssetsDTO = {
+  assetsIngested: SafeImageAssetDTO[]
+  assetsFailedToIngest: (SelectedAsset & { message: string })[]
 }

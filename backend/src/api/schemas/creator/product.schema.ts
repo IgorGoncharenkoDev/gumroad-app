@@ -53,3 +53,22 @@ export const updateProductCoverSchema = z.object({
 export type UpdateProductCoverRequestBodyDTO = z.infer<
   typeof updateProductCoverSchema
 >
+
+export const scrapeProductSchema = z.object({
+  url: z.url(),
+})
+
+export type ScrapeProductRequestBodyDTO = z.infer<typeof scrapeProductSchema>
+
+export const ingestAssetsSchema = z.object({
+  selectedCandidates: z
+    .array(
+      z.object({
+        sourcePageUrl: z.url(),
+        url: z.url(),
+      }),
+    )
+    .min(1, 'At least one asset image must be selected'),
+})
+
+export type IngestAssetsRequestBodyDTO = z.infer<typeof ingestAssetsSchema>

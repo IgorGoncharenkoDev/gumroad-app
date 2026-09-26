@@ -4,6 +4,8 @@ import type { SearchData } from 'firecrawl'
 import type {
   CreateProductRequestBodyDTO,
   CreatorProductSearchRequestBodyDTO,
+  IngestAssetsRequestBodyDTO,
+  ScrapeProductRequestBodyDTO,
   UpdateProductCoverRequestBodyDTO,
   UpdateProductRequestBodyDTO,
 } from '@/api/schemas/creator/product.schema'
@@ -13,12 +15,20 @@ import type {
   RequestWithParams,
   RequestWithParamsAndBody,
 } from '@/api/types/api.types'
-import type { SafeImageAssetDTO, SafeProductDTO } from '@/api/types/dtos.types'
+import type {
+  ProductIngestAssetsDTO,
+  ProductScrapeDTO,
+  SafeImageAssetDTO,
+  SafeProductDTO,
+} from '@/api/types/dtos.types'
 import { ProductModel } from '@/db/models/product.model'
 import { toSafeProductDTO } from '@/lib/mappers/product.mapper'
 import searchCreatorProduct, {
-  createProduct, getProductAssets,
+  createProduct,
+  getProductAssets,
   getProductDetails,
+  ingestAssets,
+  scrapeCreatorProduct,
   updateProduct,
   updateProductCover,
   updateProductVisibility,
@@ -45,6 +55,24 @@ export async function httpPostCreatorProductSearch(
     status: 'success',
     data: searchData,
   })
+}
+
+type ScrapeProductResponse = ApiResponse<ProductScrapeDTO>
+
+export async function httpPostCreatorProductScrape(
+  req: RequestWithParamsAndBody<
+    { productId: string },
+    ScrapeProductRequestBodyDTO
+  >,
+  res: Response<ScrapeProductResponse>,
+) {
+  const scrape = await scrapeCreatorProduct({
+    productId: req.params.productId,
+    url: req.body.url,
+    userId: req.user.id
+  })
+
+  return res.json({ status: 'success', data: scrape })
 }
 
 /* PRODUCT ROUTE HANDLERS */
@@ -174,5 +202,26 @@ export async function httpGetProductAssets(
   return res.json({
     status: 'success',
     data: assets,
+  })
+}
+
+type PostProductIngestAssets = ApiResponse<ProductIngestAssetsDTO>
+
+export async function httpPostProductIngestAssets(
+  req: RequestWithParamsAndBody<
+    { productId: string },
+    IngestAssetsRequestBodyDTO
+  >,
+  res: Response<PostProductIngestAssets>,
+) {
+  const result = await ingestAssets({
+    productId: req.params.productId,
+    selectedCandidates: req.body.selectedCandidates,
+    userId: req.user.id,
+  })
+
+  return res.json({
+    status: 'success',
+    data: result,
   })
 }
