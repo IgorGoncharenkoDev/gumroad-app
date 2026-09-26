@@ -6,15 +6,54 @@ export type UserDTO = {
 }
 
 export type ProductDTO = {
-  id: string
+  coverImageAssetId: string | null
   creatorId: string
-  title: string
   description: string
+  id: string
   price: number
   slug: string
-  coverImageAssetId: string | null
   stats: {
     assetCount: number
     soldCount: number
   }
+  title: string
+  visibility: 'draft' | 'published'
+}
+
+export type AssetDTO = {
+  id: string
+  cloudinary: {
+    secureUrl: string
+  }
+  creatorId: string
+  productId: string
+  meta: {
+    filename: string
+    contentType: string
+    sizeBytes: number
+    width: number
+    height: number
+  }
+  source: {
+    sourcePageUrl?: string
+    sourceUrl: string
+  }
+}
+
+export type ProductScrapeDTO = {
+  candidates: {
+    url: string
+    sourcePageUrl: string
+  }[]
+  description: string
+}
+
+type SelectedAsset = {
+  url: string
+  sourcePageUrl: string
+}
+
+export type ProductIngestAssetsDTO = {
+  assetsIngested: AssetDTO[]
+  assetsFailedToIngest: (SelectedAsset & { message: string })[]
 }

@@ -46,6 +46,20 @@ export const mapTransportError = (error: TransportError): ApiErrorType => {
         errors: error.errors,
       }
 
+    case 'external_error':
+      return {
+        status: 'error',
+        type: 'external_error',
+        message: error.message ?? 'External error',
+      }
+
+    case 'timeout':
+      return {
+        status: 'error',
+        type: 'timeout',
+        message: error.message ?? 'Timeout error',
+      }
+
     default:
       return {
         status: 'error',

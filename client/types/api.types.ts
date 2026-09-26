@@ -6,10 +6,12 @@ export type ValidationError = {
 }
 
 export type TransportError =
-  | { type: 'unauthorized', message?: string }
+  | { type: 'unauthorized'; message?: string }
   | { type: 'aborted' }
   | { type: 'forbidden' }
   | { type: 'network_error'; message?: string }
+  | { type: 'timeout'; message?: string }
+  | { type: 'external_error'; message?: string }
   | { type: 'unknown_error'; message?: string; errors?: ValidationError[] }
 
 export type ClientResult<T> = TransportError | { type: 'success'; data: T }

@@ -1,13 +1,26 @@
 import { apiServerRequest } from '@/lib/api-client/api-server-request'
-import { GetCurrentUserReturn, GetProductsReturn } from '@/lib/api-client/types'
+import {
+  GetAssetsReturn,
+  GetCurrentUserReturn,
+  GetProductDetailReturn,
+  GetProductsReturn,
+} from '@/lib/api-client/types'
 import { ApiResponse } from '@/types/api.types'
-import { ProductDTO, UserDTO } from '@/types/dtos.types'
+import { AssetDTO, ProductDTO, UserDTO } from '@/types/dtos.types'
 
 export const apiServerClient = {
   creator: {
     products: {
       get: (): GetProductsReturn =>
         apiServerRequest<ApiResponse<ProductDTO[]>>('/creator/products'),
+      getAssets: (productId: string): GetAssetsReturn =>
+        apiServerRequest<ApiResponse<AssetDTO[]>>(
+          `/creator/products/${productId}/assets`,
+        ),
+      getDetail: (productId: string): GetProductDetailReturn =>
+        apiServerRequest<ApiResponse<ProductDTO>>(
+          `/creator/products/${productId}`,
+        ),
     },
   },
   user: {

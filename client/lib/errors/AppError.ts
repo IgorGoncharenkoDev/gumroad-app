@@ -5,6 +5,7 @@ export type AppErrorType =
   | 'bad_request'
   | 'conflict'
   | 'external_error'
+  | 'timeout'
 
 export class AppError extends Error {
   statusCode: number
@@ -22,6 +23,7 @@ export class AppError extends Error {
       forbidden: 403,
       not_found: 404,
       bad_request: 400,
+      timeout: 408,
       conflict: 409,
       external_error: 502,
     }

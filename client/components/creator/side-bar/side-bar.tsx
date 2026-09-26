@@ -12,8 +12,8 @@ import {
 import { NavLink } from '@/components/creator/side-bar/nav-link'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { cn } from '@/lib/utils'
 import { useLogoutUser } from '@/lib/hooks/mutations/useAuth'
+import { cn } from '@/lib/utils'
 
 type LinksBlockProps = {
   items: NavItem[]
