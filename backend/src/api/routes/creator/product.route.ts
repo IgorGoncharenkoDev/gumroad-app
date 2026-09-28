@@ -20,12 +20,9 @@ import {
   updateProductCoverSchema,
   updateProductSchema,
 } from '@/api/schemas/creator/product.schema'
-import { requireAuth } from '@/middlewares/require-auth.middleware'
 import { validate } from '@/middlewares/validate.middleware'
 
 export const productRouter = Router()
-
-productRouter.use(requireAuth)
 
 /* IMPORT ROUTES */
 

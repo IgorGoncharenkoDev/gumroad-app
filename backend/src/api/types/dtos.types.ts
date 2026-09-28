@@ -1,3 +1,5 @@
+import type { PublicProductListRecord, PublicProductRecord } from '@/repositories/public-product.repository'
+
 export type SafeUserDTO = {
   email: string
   id: string
@@ -53,4 +55,21 @@ export type ProductScrapeDTO = {
 export type ProductIngestAssetsDTO = {
   assetsIngested: SafeImageAssetDTO[]
   assetsFailedToIngest: (SelectedAsset & { message: string })[]
+}
+
+export type PublicProductListRecordDTO = Omit<
+  PublicProductListRecord,
+  '_id' | 'creatorId'
+> & {
+  creatorId: string
+  id: string
+}
+
+export type PublicProductRecordDTO = Omit<
+  PublicProductRecord,
+  '_id' | 'coverImageAssetId' | 'creatorId'
+> & {
+  id: string
+  coverImageAssetId: string | null
+  creatorId: string
 }
