@@ -3,7 +3,7 @@ import { model, Schema } from 'mongoose'
 
 export type ProductVisibility = 'draft' | 'published'
 
-export type BaseProductDocument = {
+type BaseProductDocument = {
   creatorId: Types.ObjectId
 
   title: string

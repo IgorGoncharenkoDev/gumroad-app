@@ -17,6 +17,30 @@ export const logger = {
   },
 
   error(message: string, context?: LogContext) {
-    console.error(JSON.stringify(format('ERROR', message, context)))
+    console.error(format('ERROR', message, context))
   },
 }
+
+/* How to consume:
+
+  logger.info(
+    'Purchase processed',
+    {
+      userId:
+        session.metadata.userId,
+
+      productId:
+        session.metadata.productId,
+
+      stripeSessionId:
+        session.id,
+    },
+  )
+
+  logger.error(
+    'Request failed',
+    {
+      error,
+    },
+  )
+* */

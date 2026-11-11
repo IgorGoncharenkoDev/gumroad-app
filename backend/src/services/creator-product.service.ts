@@ -7,9 +7,9 @@ import type {
   UpdateProductRequestBodyDTO,
 } from '@/api/schemas/creator/product.schema'
 import type { SafeUserDTO , SelectedAsset } from '@/api/types/dtos.types'
-import type { DbImageAssetDocument} from '@/db/models/image-asset.model';
-import { ImageAssetModel, } from '@/db/models/image-asset.model'
-import { ProductModel } from '@/db/models/product.model'
+import type { DbImageAssetDocument} from '@/db/mongodb/models/image-asset.model';
+import { ImageAssetModel, } from '@/db/mongodb/models/image-asset.model'
+import { ProductModel } from '@/db/mongodb/models/product.model'
 import { ForbiddenError } from '@/errors/forbidden.error'
 import { NotFoundError } from '@/errors/not-found.error'
 import { ValidationError } from '@/errors/validation.error'

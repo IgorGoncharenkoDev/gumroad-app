@@ -1,7 +1,7 @@
 import { Types } from 'mongoose'
 
-import { ImageAssetModel } from '@/db/models/image-asset.model'
-import { ProductModel } from '@/db/models/product.model'
+import { ImageAssetModel } from '@/db/mongodb/models/image-asset.model'
+import { ProductModel } from '@/db/mongodb/models/product.model'
 
 export type PublicProductListRecord = {
   _id: Types.ObjectId

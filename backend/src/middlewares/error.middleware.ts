@@ -1,3 +1,8 @@
+/*
+* Express automatically forwards every asynchronous error to the error middleware.
+* So there is no need for try/catch inside controllers
+* */
+
 import type { NextFunction, Request, Response } from 'express'
 
 import { AppError } from '@/errors/app.error'

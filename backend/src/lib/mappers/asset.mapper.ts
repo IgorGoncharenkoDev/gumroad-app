@@ -1,5 +1,5 @@
 import type { SafeImageAssetDTO } from '@/api/types/dtos.types'
-import type { DbImageAssetDocument } from '@/db/models/image-asset.model'
+import type { DbImageAssetDocument } from '@/db/mongodb/models/image-asset.model'
 
 export function toSafeImageAssetDTO(
   dbImageAsset: DbImageAssetDocument,

@@ -1,6 +1,6 @@
 import { type Types } from 'mongoose'
 
-import { ImageAssetModel } from '@/db/models/image-asset.model'
+import { ImageAssetModel } from '@/db/mongodb/models/image-asset.model'
 
 export function findImageAssetById(imageAssetId: string) {
   return ImageAssetModel.findById(imageAssetId)

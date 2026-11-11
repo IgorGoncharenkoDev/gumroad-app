@@ -3,7 +3,7 @@ import type {
   PublicProductRecordDTO,
   SafeProductDTO,
 } from '@/api/types/dtos.types'
-import type { DbProductDocument } from '@/db/models/product.model'
+import type { DbProductDocument } from '@/db/mongodb/models/product.model'
 import type {
   PublicProductListRecord,
   PublicProductRecord,

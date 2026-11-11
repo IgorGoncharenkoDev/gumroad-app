@@ -1,6 +1,6 @@
 import type { ClientSession } from 'mongoose'
 
-import { ProductModel, type ProductSchemaType } from '@/db/models/product.model'
+import { ProductModel, type ProductSchemaType } from '@/db/mongodb/models/product.model'
 
 // defining the contract explicitly to avoid using Partial<ProductSchemaType>
 type CreateProductParams = {

@@ -21,7 +21,7 @@ import type {
   SafeImageAssetDTO,
   SafeProductDTO,
 } from '@/api/types/dtos.types'
-import { ProductModel } from '@/db/models/product.model'
+import { ProductModel } from '@/db/mongodb/models/product.model'
 import { toSafeProductDTO } from '@/lib/mappers/product.mapper'
 import searchCreatorProduct, {
   createProduct,
